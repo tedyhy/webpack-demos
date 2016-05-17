@@ -1,0 +1,12 @@
+{
+  "name": "webpack-demo",
+  "description": "Frontend engineering solution based on webpack.",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "gulp"
+  },
+  "licence": "MIT",
+  "devDependencies": {
+    "html-webpack-plugin": "^2.17.0"
+  }
+}
