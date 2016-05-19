@@ -1,9 +1,12 @@
 1.配置webpack-dev-server
 我们要不断运行程序然后查看页面，所以最好新建一个开发服务器，可以serve我们pack以后的代码，并且当代码更新的时候自动刷新浏览器（demo3）。
 
+webpack-dev-server（webpack开发服务器），是webpack官方提供的一个辅助开发工具，它可以自动监控项目下的文件，一旦有修改保存操作，开发服务器就会自动运行webpack 打包命令，帮我们自动将开发的代码重新打包。而且，如果需要的话，还能自动刷新浏览器，重新加载资源。
+
 2.参考
 https://github.com/vikingmute/webpack-for-fools/blob/master/entries/chapter-1.md#配置webpack-dev-server
 https://webpack.github.io/docs/webpack-dev-server.html#content-base
+http://www.07net01.com/2015/12/1004731.html
 
 3.
 npm install webpack-dev-server -g

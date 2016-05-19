@@ -3,7 +3,7 @@
   "description": "Frontend engineering solution based on webpack.",
   "version": "0.1.0",
   "scripts": {
-    "start": "webpack-dev-server --content-base build"
+    "start": "webpack-dev-server --inline"
   },
   "licence": "MIT",
   "devDependencies": {
