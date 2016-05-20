@@ -16,8 +16,18 @@ npm install webpack-dev-server --save-dev
 4.提供本地静态资源服务器服务
 npm start
 
-访问地址为：http://localhost:8080/webpack-dev-server
+5.访问地址为：http://localhost:8080/webpack-dev-server
+这里是dev-server提供静态资源服务的目录，可以通过以下配置指定：
+devServer: {
+	contentBase: 'build'
+}
+或者是在命令行添加此配置：
+$webpack-dev-server --inline --content-base build
+
+6.访问地址为：http://localhost:8080/webpack-dev-server
 这里面都是生成后的build目录下的静态资源
+
+
 
 
 
