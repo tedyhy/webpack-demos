@@ -27,5 +27,20 @@ http://npm.taobao.org/package/
 5.通过npm添加第三方库
 $npm install jquery moment --save
 
+6.webpack可以处理动态语言模板，如php、jsp等
+如：
 
+plugins: [
+	new HtmlwebpackPlugin({ //根据模板插入css/js等生成最终HTML
+		title: 'Hello World activityList',
+		filename: 'activityList.php', //生成的html存放路径，相对于 path
+		template: APP_PATH + '/templates/activityList.php', //html模板路径
+		inject: 'body', //允许插件修改哪些内容，包括head与body
+		// hash: true, //为静态资源生成hash值
+		minify: { //压缩HTML文件
+			removeComments: true, //移除HTML中的注释
+			collapseWhitespace: true //删除空白符与换行符
+		}
+	}),
+]
 
