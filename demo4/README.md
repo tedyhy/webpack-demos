@@ -13,8 +13,19 @@ webpack的理念是基于项目处理的，把对应的文件格式给对应的l
 $npm install sass-loader node-sass --save-dev
 
 
+3) 处理图片
+根据你的需求将一些图片自动转成base64编码的，为你减轻很多的网络请求。
+$npm install url-loader --save-dev
+
+
 3.启动服务
 $npm start
 
 4.taobao npm库地址
 http://npm.taobao.org/package/
+
+5.通过npm添加第三方库
+$npm install jquery moment --save
+
+
+

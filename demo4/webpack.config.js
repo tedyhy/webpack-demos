@@ -26,7 +26,10 @@ module.exports = {
 			test: /\.scss$/,
 			loaders: ['style', 'css', 'sass'], // 或者：'style!css!sass'
 			include: APP_PATH
-		}, ]
+		}, {
+			test: /\.(png|jpg)$/,
+			loader: 'url?limit=40000' // limit参数：当你图片大小小于这个限制的时候，会自动启用base64编码图片。
+		}]
 	},
 	plugins: [
 		new HtmlwebpackPlugin({ //根据模板插入css/js等生成最终HTML
@@ -44,7 +47,7 @@ module.exports = {
 			compress: {
 				warnings: false
 			},
-			except: ['$super', '$', 'exports', 'require'] //排除关键字
+			except: ['$super', '$', 'jQuery', 'exports', 'require'] //排除关键字
 		}),
 		new webpack.ProvidePlugin({ //加载jquery
 			$: 'jquery'
