@@ -1,0 +1,23 @@
+{
+  "name": "webpack-demo",
+  "description": "Frontend engineering solution based on webpack.",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "licence": "MIT",
+  "devDependencies": {
+    "css-loader": "^0.23.1",
+    "html-webpack-plugin": "^2.17.0",
+    "node-sass": "^3.7.0",
+    "sass-loader": "^3.2.0",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.0",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "jquery": "^2.2.4",
+    "moment": "^2.13.0"
+  }
+}

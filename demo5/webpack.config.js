@@ -1,26 +1,37 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlwebpackPlugin = require('html-webpack-plugin');
+var WebpackDevServer = require("webpack-dev-server");
 //定义了一些文件夹的路径
 var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
 
 module.exports = {
-	//项目的文件夹 可以直接用文件夹名称 默认会找index.js 也可以确定是哪个文件名字
 	entry: [
-		// 'webpack/hot/dev-server',
-		// 'webpack-dev-server/client?http://localhost:8080',
-		'./app/index.js'
+		'./app/'
 	],
-	//输出的文件名 合并以后的js会命名为bundle.js
 	output: {
 		path: BUILD_PATH,
 		filename: 'bundle-[hash].js',
 	},
-	//添加我们的插件 会自动生成一个html文件
+	module: {
+		// test里面包含一个正则，包含需要匹配的文件，loaders是一个数组，包含要处理这些程序的loaders
+		// 这里我们用了css和style，注意loaders的处理顺序是从右到左的，这里就是先运行css-loader然后是style-loader.
+		loaders: [{
+			test: /\.css$/,
+			loaders: ['style', 'css'],
+			include: APP_PATH
+		}, {
+			test: /\.scss$/,
+			loaders: ['style', 'css', 'sass'], // 或者：'style!css!sass'
+			include: APP_PATH
+		}, {
+			test: /\.(png|jpg)$/,
+			loader: 'url?limit=40000' // limit参数：当你图片大小小于这个限制的时候，会自动启用base64编码图片。
+		}]
+	},
 	plugins: [
-		// new webpack.HotModuleReplacementPlugin(),
 		new HtmlwebpackPlugin({ //根据模板插入css/js等生成最终HTML
 			title: 'Hello World activityList',
 			filename: 'activityList.html', //生成的html存放路径，相对于 path
@@ -36,16 +47,18 @@ module.exports = {
 			compress: {
 				warnings: false
 			},
-			except: ['$super', '$', 'exports', 'require'] //排除关键字
+			except: ['$super', '$', 'jQuery', 'exports', 'require'] //排除关键字
 		}),
 		new webpack.ProvidePlugin({ //加载jquery
 			$: 'jquery'
 		}),
 	],
+	// webpack-dev-server 配置
 	devServer: {
-		historyApiFallback: true,
-		hot: true,
+		contentBase: BUILD_PATH,
+		// historyApiFallback: true,
+		// hot: true,
 		inline: true,
 		progress: true,
-	},
+	}
 };
