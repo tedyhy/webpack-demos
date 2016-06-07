@@ -28,3 +28,6 @@ plugins: [
 $npm run build
 
 
+2.生成多页面
+运行如下：
+$npm run build-multip

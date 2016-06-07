@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack --progress --profile --colors --config webpack.production.config.js"
+    "build": "webpack --progress --profile --colors --config webpack.production.config.js",
+    "build-multip": "webpack --progress --profile --colors --config webpack.production.multip.config.js"
   },
   "licence": "MIT",
   "devDependencies": {

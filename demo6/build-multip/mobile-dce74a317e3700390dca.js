@@ -1,0 +1,1 @@
+webpackJsonp([1],[function(e,n,o){(function(e){"use strict";o(3),e(function(){var n=document.createElement("div");n.innerHTML="<h1>Hello World mobile.html</h1>",document.body.appendChild(n),e("h1").greenify()})}).call(n,o(1))}]);

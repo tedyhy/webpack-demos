@@ -5,15 +5,21 @@ var HtmlwebpackPlugin = require('html-webpack-plugin');
 var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
+var BUILD_MULTIP_PATH = path.resolve(ROOT_PATH, 'build-multip');
+// template的文件夹路径
+var TEM_PATH = path.resolve(ROOT_PATH, 'app/templates');
 
 module.exports = {
 	entry: {
 		app: path.resolve(APP_PATH, 'index.js'),
+		mobile: path.resolve(APP_PATH, 'mobile.js'),
 		vendors: ['jquery', 'moment'] // 添加要打包在vendors里面的库
 	},
 	output: {
-		path: BUILD_PATH,
-		filename: 'bundle-[hash].js',
+		path: BUILD_MULTIP_PATH,
+		// 注意，我们修改了bundle.js 用一个数组[name]来代替，他会根据entry的入口文件名称生成多个js文件，
+		// 这里就是(app.js,mobile.js和vendors.js)
+		filename: '[name]-[hash].js',
 	},
 	module: {
 		// test里面包含一个正则，包含需要匹配的文件，loaders是一个数组，包含要处理这些程序的loaders
@@ -39,19 +45,27 @@ module.exports = {
 				presets: ['es2015']
 			}
 		}],
-		// preLoaders: [{
-		// 	test: /\.jsx?$/,
-		// 	include: APP_PATH,
-		// 	loader: 'jshint-loader'
-		// }]
 	},
 	plugins: [
+		// 创建了两个HtmlWebpackPlugin的实例，生成两个页面：index.html、mobile.html
 		new HtmlwebpackPlugin({ //根据模板插入css/js等生成最终HTML
-			title: 'Hello World activityList',
-			filename: 'activityList.html', //生成的html存放路径，相对于 path
-			template: APP_PATH + '/templates/activityList.html', //html模板路径
+			title: 'Hello World index.html',
+			filename: 'index.html', //生成的html存放路径，相对于 path
+			template: path.resolve(TEM_PATH, 'activityList.html'), //html模板路径
+			inject: 'body', //允许插件修改哪些内容，包括head与body，要把script插入到标签里
+			// chunks这个参数告诉插件要引用entry里面的哪几个入口
+			chunks: ['vendors', 'app'],
+			minify: { //压缩HTML文件
+				removeComments: true, //移除HTML中的注释
+				collapseWhitespace: true //删除空白符与换行符
+			}
+		}),
+		new HtmlwebpackPlugin({ //根据模板插入css/js等生成最终HTML
+			title: 'Hello World mobile.html',
+			filename: 'mobile.html', //生成的html存放路径，相对于 path
+			template: path.resolve(TEM_PATH, 'mobile.html'), //html模板路径
 			inject: 'body', //允许插件修改哪些内容，包括head与body
-			// hash: true, //为静态资源生成hash值
+			chunks: ['vendors', 'mobile'],
 			minify: { //压缩HTML文件
 				removeComments: true, //移除HTML中的注释
 				collapseWhitespace: true //删除空白符与换行符
@@ -63,7 +77,7 @@ module.exports = {
 			},
 			except: ['$super', '$', 'jQuery', 'exports', 'require'] //排除关键字
 		}),
-		//把入口文件里面的数组打包成verdors.js
+		// 把入口文件里面的数组打包成verdors.js
 		new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
 		// 加载jquery，为每个脚本提供变量：$、jQuery、window.jQuery。
 		new webpack.ProvidePlugin({
@@ -72,25 +86,4 @@ module.exports = {
 			"window.jQuery": "jquery"
 		}),
 	],
-	// webpack-dev-server 配置
-	// devServer: {
-	// 	contentBase: BUILD_PATH,
-	// 	// historyApiFallback: true,
-	// 	// hot: true,
-	// 	inline: true,
-	// 	progress: true,
-	// 	// 其实很简单的，只要配置这个参数就可以了
-	// 	proxy: {
-	// 		'/apis/*': {
-	// 			target: 'http://localhost:3000/',
-	// 			secure: false
-	// 		}
-	// 	}
-	// },
-	// 启用source-map，方便开发定位和排错
-	// devtool: 'eval-source-map',
-	//配置jshint的选项，支持es6的校验
-	// jshint: {
-	// 	"esnext": true
-	// },
 };
