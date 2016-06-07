@@ -1,7 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlwebpackPlugin = require('html-webpack-plugin');
-var WebpackDevServer = require("webpack-dev-server");
 //定义了一些文件夹的路径
 var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
@@ -39,11 +38,11 @@ module.exports = {
 				presets: ['es2015']
 			}
 		}],
-		preLoaders: [{
-			test: /\.jsx?$/,
-			include: APP_PATH,
-			loader: 'jshint-loader'
-		}]
+		// preLoaders: [{
+		// 	test: /\.jsx?$/,
+		// 	include: APP_PATH,
+		// 	loader: 'jshint-loader'
+		// }]
 	},
 	plugins: [
 		new HtmlwebpackPlugin({ //根据模板插入css/js等生成最终HTML
@@ -52,17 +51,17 @@ module.exports = {
 			template: APP_PATH + '/templates/activityList.html', //html模板路径
 			inject: 'body', //允许插件修改哪些内容，包括head与body
 			// hash: true, //为静态资源生成hash值
-			// minify: { //压缩HTML文件
-			// 	removeComments: true, //移除HTML中的注释
-			// 	collapseWhitespace: true //删除空白符与换行符
-			// }
+			minify: { //压缩HTML文件
+				removeComments: true, //移除HTML中的注释
+				collapseWhitespace: true //删除空白符与换行符
+			}
 		}),
-		// new webpack.optimize.UglifyJsPlugin({ //压缩代码
-		// 	compress: {
-		// 		warnings: false
-		// 	},
-		// 	except: ['$super', '$', 'jQuery', 'exports', 'require'] //排除关键字
-		// }),
+		new webpack.optimize.UglifyJsPlugin({ //压缩代码
+			compress: {
+				warnings: false
+			},
+			except: ['$super', '$', 'jQuery', 'exports', 'require'] //排除关键字
+		}),
 		// 加载jquery，为每个脚本提供变量：$、jQuery、window.jQuery。
 		new webpack.ProvidePlugin({
 			$: "jquery",
@@ -71,24 +70,24 @@ module.exports = {
 		}),
 	],
 	// webpack-dev-server 配置
-	devServer: {
-		contentBase: BUILD_PATH,
-		// historyApiFallback: true,
-		// hot: true,
-		inline: true,
-		progress: true,
-		// 其实很简单的，只要配置这个参数就可以了
-		proxy: {
-			'/apis/*': {
-				target: 'http://localhost:3000/',
-				secure: false
-			}
-		}
-	},
+	// devServer: {
+	// 	contentBase: BUILD_PATH,
+	// 	// historyApiFallback: true,
+	// 	// hot: true,
+	// 	inline: true,
+	// 	progress: true,
+	// 	// 其实很简单的，只要配置这个参数就可以了
+	// 	proxy: {
+	// 		'/apis/*': {
+	// 			target: 'http://localhost:3000/',
+	// 			secure: false
+	// 		}
+	// 	}
+	// },
 	// 启用source-map，方便开发定位和排错
-	devtool: 'eval-source-map',
+	// devtool: 'eval-source-map',
 	//配置jshint的选项，支持es6的校验
-	jshint: {
-		"esnext": true
-	},
+	// jshint: {
+	// 	"esnext": true
+	// },
 };

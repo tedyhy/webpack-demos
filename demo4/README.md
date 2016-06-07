@@ -1,3 +1,6 @@
+参考:
+https://github.com/vikingmute/webpack-for-fools/blob/master/entries/chapter-1.md
+
 1.添加css样式
 webpack使用loader的方式来处理各种各样的资源，比如说样式文件，我们需要两种loader：css-loader 和 style－loader。
 css-loader会遍历css文件，找到所有的url(...)并且处理。
