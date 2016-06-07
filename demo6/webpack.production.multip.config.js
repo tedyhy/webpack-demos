@@ -19,7 +19,7 @@ module.exports = {
 		path: BUILD_MULTIP_PATH,
 		// 注意，我们修改了bundle.js 用一个数组[name]来代替，他会根据entry的入口文件名称生成多个js文件，
 		// 这里就是(app.js,mobile.js和vendors.js)
-		filename: '[name]-[hash].js',
+		filename: '[name].[hash].js',
 	},
 	module: {
 		// test里面包含一个正则，包含需要匹配的文件，loaders是一个数组，包含要处理这些程序的loaders

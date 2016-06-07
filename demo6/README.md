@@ -31,3 +31,11 @@ $npm run build
 2.生成多页面
 运行如下：
 $npm run build-multip
+
+3.生成Hash名称的script来防止缓存
+基于文件的md5，配置如下：
+output: {
+	path: BUILD_PATH,
+	// 只要再加上hash这个参数就可以了
+	filename: '[name].[hash].js'
+},
