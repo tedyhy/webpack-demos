@@ -54,6 +54,7 @@ module.exports = {
 			template: path.resolve(TEM_PATH, 'activityList.html'), //html模板路径
 			inject: 'body', //允许插件修改哪些内容，包括head与body，要把script插入到标签里
 			// chunks这个参数告诉插件要引用entry里面的哪几个入口
+			// chunks里的模块顺序有疑惑？？？
 			chunks: ['vendors', 'app'],
 			minify: { //压缩HTML文件
 				removeComments: true, //移除HTML中的注释
