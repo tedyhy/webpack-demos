@@ -109,7 +109,7 @@ $npm install babel-loader babel-preset-es2015 --save-dev
 
 
 
-2.部署上线
+二、部署上线
 我们应该新创建一个单独的config文件，因为部署上线使用webpack的时候我们不需要一些dev-tools,dev-server和jshint校验等。
 复制我们现有的config文件，命名为 webpack.production.config.js，将里面关于 devServer等和开发有关的东西删掉。
 
@@ -121,13 +121,6 @@ $npm install babel-loader babel-preset-es2015 --save-dev
 
 当要上线的时候,运行如下：
 $npm run build
-
-
-
-
-
-3.启动服务
-$npm start
 
 
 
