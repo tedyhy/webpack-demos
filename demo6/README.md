@@ -1,5 +1,6 @@
 参考:
 https://github.com/vikingmute/webpack-for-fools/blob/master/entries/chapter-2.md
+https://segmentfault.com/a/1190000002552008
 
 一、build优化
 1.分离app.js和第三方库
